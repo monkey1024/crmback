@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey1024.crmback.mapper.DictionaryMapper">
+
+    <resultMap id="dictionaryMap" type="dictionaryType">
+        <id column="tid" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="description" property="description"/>
+        <collection property="values" ofType="dictionaryValue">
+            <id column="vid" property="id"/>
+            <result column="text" property="text"/>
+            <result column="value" property="value"/>
+        </collection>
+    </resultMap>
+    <select id="selectAll" resultMap="dictionaryMap">
+        SELECT
+            t.code,
+            t.id tid,
+            t.name,
+            t.description,
+            v.id vid,
+            v.text,
+            v.value
+        FROM
+            t_dictionary_type t
+            LEFT JOIN t_dictionary_value v ON t.id = v.type_id
+    </select>
+</mapper>
