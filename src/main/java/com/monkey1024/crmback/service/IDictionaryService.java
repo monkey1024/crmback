@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface IDictionaryService extends IService<DictionaryType> {
     List<DictionaryType> selectAll();
+
+    boolean batchDeleteDictionary(String ids);
 }
